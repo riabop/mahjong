@@ -67,29 +67,29 @@
 
 	ficha = function (){
 
+		createID = function(){
+			var timestamp = new Date().getTime();
+			var randomNumber = Math.ceil(Math.random()*100000);
+			return type + "_" + timestamp + "_" + randomNumber;	
+		}
+		
 		var type = "ficha";
+		var ID = createID();
 
-		var timestamp = new Date().getTime();
-		this.id = type + "_" + timestamp;
 		var el = null;
 
 		// Funcion privada
 		var ficha = function(){
-
-			var timestamp = new Date().getTime();
-			this.id = "ficha_" + timestamp;
-
-			console.log("inicializade objeto ", this.id);
+			console.log("inicializade objeto ", ID);
 			drawTemplate();
-
-			el = document.getElementById(this.id);
+			el = document.getElementById(ID);
 			//console.log("this.el",el);
 		}
 		
 		// Funcion privada
 		var drawTemplate = function(){
 			//console.log("dibuja!");	
-			document.write('<div id="'+ this.id  +'" class="ficha" style="top:0px;left:0px;display:none">'+this.id+'</div>');
+			document.write('<div id="'+ ID +'" class="ficha" style="top:0px;left:0px;display:none">'+ ID +'</div>');
 		}
 
 		this.oculta = function(){
