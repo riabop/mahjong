@@ -49,10 +49,12 @@
 
 </head>
 
+
 <body>
 
 	<div id="mainContainer">
 		<div id="levelPicture"></div>
+		<div id="piecesContainer"></div>
 	</div>
 
 <script type="text/javascript">
@@ -75,7 +77,6 @@
 		
 		var type = "ficha";
 		var ID = createID();
-
 		var el = null;
 
 		// Funcion privada
@@ -87,10 +88,17 @@
 		}
 		
 		// Funcion privada
-		var drawTemplate = function(){
+		//this.render = function(where){
+		drawTemplate = function(){
 			//console.log("dibuja!");	
 			document.write('<div id="'+ ID +'" class="ficha" style="top:0px;left:0px;display:none">'+ ID +'</div>');
 		}
+
+		/*
+		this.giveMeTheTemplate = function(){
+			return '<div id="'+ ID +'" class="ficha" style="top:0px;left:0px;display:none">'+ ID +'</div>';
+		}
+		*/
 
 		this.oculta = function(){
 			//console.log("oculta!");	
@@ -116,16 +124,9 @@
 
 	} 
 
-	/*
-	var ceterObjectOnscreen = function(id){
-
-	}
-	*/
-
 	var redrawAll = function(){
 
 		//console.log("Redraw!");
-
 		win_w = window.innerWidth;
 		win_h = window.innerHeight;
 
@@ -137,6 +138,25 @@
 		obj.style.top = y+"px";
 		obj.style.left = x+"px";
 
+		// paint the pieces
+
+
+		console.log("scnarioWidth:",scnarioWidth);
+		console.log("scnarioHeight:",scnarioHeight);
+		var desp_x = (win_w/2)-(scnarioWidth/2);
+		var desp_y = (win_h/2)-(scnarioHeight/2);
+
+
+		var lon = fichasEnJuego.length;
+		for (var i = 0; i < lon; i++){
+			var x=escenario1.positions[i].x * 100 + desp_x;
+			var y=escenario1.positions[i].y * 75 + desp_y; 
+			fichasEnJuego[i].setPosition(x,y);
+		}
+
+
+
+		relocateFichas();
 	}
 
 	window.onresize = function(event) {
@@ -148,32 +168,79 @@
 		type: "scenary",
 		name: "scenary number one",
 		bgPicture: "flowers.jpg",
+		/*
 		positions: [
-			{x:0,y:10},{x:20,y:30},{x:40,y:50},{x:80,y:90},{x:110,y:120}
+			{piso1:[{x:0,y:0,},{x:0,y:1},{x:0,y:2},{x:1,y:2},{x:2,y:2}]},
+			{piso2:[{x:0,y:0,},{x:0,y:1},{x:0,y:2},{x:1,y:2},{x:2,y:2}]},
+			{piso3:[{x:0,y:0,},{x:0,y:1},{x:0,y:2},{x:1,y:2},{x:2,y:2}]},
+			{piso4:[{x:0,y:0,},{x:0,y:1},{x:0,y:2},{x:1,y:2},{x:2,y:2}]},
 		]
+		*/
+		positions: [{x:0,y:0,},{x:0,y:1},{x:0,y:2},{x:1,y:2},{x:2,y:2}]
 	};
 
-	/*
-	var mio = new ficha;
-	mio.oculta();
-	mio.show();
-	mio.setPosition(100,200);
-	*/
+	var fichasEnJuego=[];
 
-	//console.log(escenario1.positions);
+	var scnarioWidth = null;
+	var scnarioHeight = null;
 
-	var long = escenario1.positions.length;
+	var createScenario = function(){ // Here the pieces are created, we create new objects
 
-	var fichas=[];
+		var pieces_width = 0;
+		var pieces_height = 0;
 
-	for (var i=0; i<long; i++){
-		fichas[i] = new ficha;
-		var x=escenario1.positions[i].x;
-		var y=escenario1.positions[i].y; 
-		fichas[i].setPosition(x,y);
-		fichas[i].show();
+		var lon = escenario1.positions.length;
+		for (var i=0; i<lon; i++){
+			fichasEnJuego[i] = new ficha;
+			var x=escenario1.positions[i].x * 100;
+			var y=escenario1.positions[i].y * 75; 
+			fichasEnJuego[i].setPosition(x,y);
+			fichasEnJuego[i].show();
+
+			if (pieces_width < x) pieces_width = x;
+			if (pieces_height < y) pieces_height = y;
+		}
+
+		scnarioWidth = pieces_width + 100;
+		scnarioHeight = pieces_height + 75;
+
 	}
 
+	var relocateFichas = function(){ // here we relocate the pieces upon the scenary, we dont create objects
+		
+		// This works!
+
+		/*
+		var lon = fichasEnJuego.length;
+		var where = document.getElementById("piecesContainer");
+
+		for (var i = 0; i < lon; i++){
+			//fichasEnJuego[i].render(where);
+			var x=escenario1.positions[i].x * 100;
+			var y=escenario1.positions[i].y * 75; 
+			fichasEnJuego[i].setPosition(x,y);
+			
+		}
+		*/
+		
+		/*
+		var lon = fichasEnJuego.length;
+		var trozo = null;
+
+		for (var i = 0; i < lon; i++){
+			var x=escenario1.positions[i].x * 100;
+			var y=escenario1.positions[i].y * 75; 
+			fichasEnJuego[i].setPosition(x,y);
+			trozo = trozo + fichasEnJuego[i].giveMeTheTemplate();
+		}
+
+		var where = document.getElementById("piecesContainer");
+		where.innerHTML = trozo;
+		*/
+
+	}
+
+	createScenario();
 	redrawAll();
 
 </script>
