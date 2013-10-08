@@ -95,23 +95,30 @@
 			obj.style.background = "#ccc";
 
 		},
-		/*
-		isSelected: function(id){
-
-			if (gameStatus.selectedPieces.piece1 == id){
-				return true;
-			} else {
-
-				return false;
-			}
-
-		},
-		*/
 		giveMeThePieceType: function(id){
 			var obj = document.getElementById(id); 
 			return obj.getAttribute("pieceType");
 		},
-		destroyPiece: function(){
+		destroyPiece: function(id){ // destroy the f***** piece forever!
+
+			console.log("elimina pieza!");
+			//var destruction = function(id) {
+				console.log("destruyendo ..."); 
+				var obj = document.getElementById(id);
+				var op = obj.style.opacity;
+				op = op - 0.1
+				console.log("op:",op);
+				obj.style.opacity = op;
+				
+				
+				if ( op > 0.5) { 
+					var t = setTimeout( gameOperations.destroyPiece(id), 200 ); // TODO this does not run properly
+				} else {
+					console.log("final!");
+				}
+				
+			//} 
+			//destruction(id);
 
 		},
 		makeDancePieces: function(){
@@ -161,6 +168,8 @@
 
 						//Ver si podemos destruir la ficha o esta impedida 
 						if (1) { // destruimos las piezas
+
+							gameOperations.destroyPiece(id);
 
 						} else { // no podemos destruir las piezas
 
