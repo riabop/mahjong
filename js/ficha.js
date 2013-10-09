@@ -1,6 +1,8 @@
-ficha = function (pieceType){
+"use strict";
 
-	createID = function(){
+var ficha = function (pieceType){
+
+	var createID = function(){
 		var timestamp = new Date().getTime();
 		var randomNumber = Math.ceil(Math.random()*100000);
 		return type + "_" + timestamp + "_" + randomNumber;	
@@ -12,7 +14,7 @@ ficha = function (pieceType){
 
 	// Funcion privada
 	var ficha = function(pieceType){
-		console.log("inicializade objeto ", ID);
+		console.log("inicializado objeto ", ID);
 		drawTemplate();
 		el = document.getElementById(ID);
 		//console.log("this.el",el);
@@ -27,9 +29,9 @@ ficha = function (pieceType){
 		};
 	}
 	
-	drawTemplate = function(){
+	var drawTemplate = function(){
 		//console.log("dibuja!");	
-		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px;left:0px;display:none;opacity:1"> [' + pieceType+ '] ' + ID +'</div>');
+		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px;left:0px;display:none;opacity:1"> [' + pieceType+ '] <div class="mini-info">' + ID +'</div></div>');
 	}
 
 	this.oculta = function(){
@@ -37,7 +39,7 @@ ficha = function (pieceType){
 	}
 
 	this.getType = function(){
-		return type;
+		return pieceType;
 	};
 
 	this.selectTicha = function(){
