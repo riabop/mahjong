@@ -29,7 +29,7 @@ ficha = function (pieceType){
 	
 	drawTemplate = function(){
 		//console.log("dibuja!");	
-		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px;left:0px;display:none"> [' + pieceType+ '] ' + ID +'</div>');
+		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px;left:0px;display:none;opacity:1"> [' + pieceType+ '] ' + ID +'</div>');
 	}
 
 	this.oculta = function(){
