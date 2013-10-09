@@ -1,41 +1,74 @@
-	body {
-		margin: 0px;
-		padding: 0px;
-	}
+body {
+	margin: 0px;
+	padding: 0px;
+	background-image: url("debug-bg.png");
+	background-attachment: fixed;
+	background-position: 50% 50%;
+}
 
-	#mainContainer{
-		width: 100%;
-		height: 100%;
-		background-color: #ccc;
-	}
+#mainContainer{
+	width: 100%;
+	height: 100%;
+	background-color: #ccc;
+}
 
-	#levelPicture{
-		width: 80%;
-		height: 80%;
-		background-color: #ddd;
-		border: 1px solid red;
-		position: absolute;
-		overflow: hidden;
-	}
+#levelPicture{
+	width: 80%;
+	height: 80%;
+	background-color: #ddd;
+	border: 1px solid red;
+	position: absolute;
+	overflow: hidden;
+	opacity: 0.5;
+}
 
-	.ficha{
-		width: 80px;
-		height: 100px;
-		background-color: #eee;
-		display: block;	
+.ficha{
+	width: 80px;
+	height: 100px;
+	background-color: #eee;
+	display: block;	
 
-		border-top: 1px solid #fff;
-		border-right: 2px solid #CCCCCC;
-		border-bottom: 4px solid #ddd;
-		border-left: 1px solid #ddd;
+	border-top: 1px solid #fff;
+	border-right: 2px solid #CCCCCC;
+	border-bottom: 25px solid #ddd;
+	border-left: 1px solid #ddd;
 
-		box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
-		border-radius: 3px;
+	box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
 
-		position: absolute;
-	}
+	position: absolute;
+}
 
-	.ficha:hover{
-		box-shadow: 1px 1px 3px rgba(255, 0, 0, 0.8);
-		border-color: red;
-	}
+.mini-info{
+	font-family: helvetica;
+	font-size: 9px;
+}
+
+.ficha:hover{
+	box-shadow: 1px 1px 3px rgba(255, 0, 0, 0.8);
+	border-color: red;
+}
+
+
+// splash screen styles
+
+#splashScreen{
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+
+    position: absolute;
+    z-index: 99;
+}
+
+/*
+#loadingLayer{
+	width: 100%;
+	height: 100%;
+	background-color: #000;	
+
+    position: absolute;
+    z-index: 100;
+    opacity: 0.7;
+}
+*/
