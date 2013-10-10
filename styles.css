@@ -3,7 +3,7 @@ body {
 	padding: 0px;
 	background-image: url("debug-bg.png");
 	background-attachment: fixed;
-	background-position: 50% 50%;
+	/* background-position: 50% 50%; */
 }
 
 #mainContainer{
@@ -33,7 +33,7 @@ body {
 	border-bottom: 25px solid #ddd;
 	border-left: 1px solid #ddd;
 
-	box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.1);
 	border-radius: 3px;
 
 	position: absolute;
