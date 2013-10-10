@@ -4,10 +4,19 @@
 	var pi_griego = 3.14;
 	var $ = document.getElementById;
 
+	var pieces_width = 0;
+	var pieces_height = 0;
+	var PIECE_WIDTH = 80;
+	var PIECE_HEIGHT = 100;
+	var PIECE_THICKNESS = 25; //thickness
 	//document.getElementById("mainContainer").innerHTML = "fuck!";
 
 	console.log("fuking javascript!");
 
+
+	/*
+		this function draws the pieces, reading the virtual stage
+	*/
 	var redrawAll = function() {
 
 		//console.log("Redraw!");
@@ -15,24 +24,30 @@
 		var win_h = window.innerHeight;
 
 		// relocate background picture.
+		/*
 		var obj = document.getElementById("levelPicture");
 		console.log("obj.style.width/2:", obj.clientWidth);
 		var x = (win_w / 2) - (obj.clientWidth / 2);
 		var y = (win_h / 2) - (obj.clientHeight / 2);
 		obj.style.top = y + "px";
 		obj.style.left = x + "px";
+		*/
 
 		// paint the pieces
 		console.log("scnarioWidth:", scnarioWidth);
 		console.log("scnarioHeight:", scnarioHeight);
-		var desp_x = (win_w / 2) - (scnarioWidth / 2);
-		var desp_y = (win_h / 2) - (scnarioHeight / 2);
+		var desp_x = 0; //(win_w / 2) - (scnarioWidth / 2);
+		var desp_y = 100; //(win_h / 2) - (scnarioHeight / 2);
 
 
 		var lon = worldManager.fichasEnJuego.length;
+
+		var upon_the_screen_x = PIECE_WIDTH/2;
+		var upon_the_screen_y = PIECE_HEIGHT/2;
+
 		for (var i = 0; i < lon; i++) {
-			var x = escenario1.positions[i].x * 80 + desp_x;
-			var y = escenario1.positions[i].y * 100 + desp_y;
+			var x = escenario1.positions[i].x * upon_the_screen_x + desp_x;
+			var y = escenario1.positions[i].y * upon_the_screen_y + desp_y - (PIECE_THICKNESS * escenario1.positions[i].z);
 			worldManager.fichasEnJuego[i].setPosition(x, y);
 		}
 
@@ -48,31 +63,33 @@
 	var scnarioWidth = null;
 	var scnarioHeight = null;
 
+	/* 
+		This function creates a virtual stage reading the world json 
+	*/
+
 	var createScenario = function(scn) { // Here the pieces are created, we create new objects
 		"use strict";
-
-		var pieces_width = 0;
-		var pieces_height = 0;
-		var PIEZE_WIDTH = 80;
-		var PIEZE_HEIGHT = 100;
 
 		var lon = scn.positions.length;
 		for (var i = 0; i < lon; i++) {
 
 			worldManager.fichasEnJuego[i] = new ficha(scn.positions[i].pieceType);
 
-			var x = scn.positions[i].x * PIEZE_WIDTH;
-			var y = scn.positions[i].y * PIEZE_HEIGHT;
+			var x = scn.positions[i].x * PIECE_WIDTH;
+			var y = scn.positions[i].y * PIECE_HEIGHT;
 
 			worldManager.fichasEnJuego[i].setPosition(x, y);
 			worldManager.fichasEnJuego[i].show();
+			//worldManager.fichasEnJuego[i].setX(x); //show();
+			//worldManager.fichasEnJuego[i].setY(y);
+			worldManager.fichasEnJuego[i].setStatus("ON");
 
 			if (pieces_width < x) pieces_width = x;
 			if (pieces_height < y) pieces_height = y;
 		}
 
-		scnarioWidth = pieces_width + PIEZE_WIDTH;
-		scnarioHeight = pieces_height + PIEZE_HEIGHT;
+		scnarioWidth = pieces_width + PIECE_WIDTH;
+		scnarioHeight = pieces_height + PIECE_HEIGHT;
 
 	}
 
@@ -103,6 +120,9 @@
 			var obj = document.getElementById(id);
 			return obj.getAttribute("pieceType");
 		},
+
+
+		// TODO Put this inside the piece code!!!
 		destroyPiece: function(id) { // destroy the f***** piece forever!
 
 			console.log("elimina pieza!");
@@ -124,10 +144,15 @@
 			var obj = document.getElementById(id);
 			var op = obj.style.opacity;
 			obj.style.opacity = 0;
+			obj.style.display = "none";
+		
 		},
+
+		// TODO Put this inside the piece code!!!
 		makeDancePieces: function() {
 
 		},
+		
 		startGame: function() {
 
 		},

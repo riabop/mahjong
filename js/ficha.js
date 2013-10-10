@@ -12,6 +12,12 @@ var ficha = function (pieceType){
 	var ID = createID();
 	var el = null;
 
+	this.properties = {
+		x:null,
+		y:null,
+		visible: true
+	}
+
 	// Funcion privada
 	var ficha = function(pieceType){
 		console.log("inicializado objeto ", ID);
@@ -59,6 +65,12 @@ var ficha = function (pieceType){
 	this.setPosition = function(x,y){
 		el.style.top = y+"px";
 		el.style.left = x+"px";
+		this.properties.x = x;
+		this.properties.y = y;
+	};
+
+	this.setStatus = function(status){
+		// ON or visible... 
 	};
 
 	ficha(pieceType);
