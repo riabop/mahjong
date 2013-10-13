@@ -7,9 +7,9 @@ var ficha = function (pieceType){
 		var randomNumber = Math.ceil(Math.random()*100000);
 		return type + "_" + timestamp + "_" + randomNumber;	
 	}
-	
-	var type = "ficha";
+
 	var ID = createID();
+	var type = "ficha";
 	var el = null;
 
 	this.properties = {
@@ -24,29 +24,23 @@ var ficha = function (pieceType){
 		mem_z:null
 	}
 
-	// Funcion privada
 	var ficha = function(pieceType,self){
-		console.log("inicializado objeto ", ID);
+
+		console.log("initialize object ", ID);
 		drawTemplate();
 		el = document.getElementById(ID);
-		//console.log("this.el",el);
-
 		self.properties.el = el;
 
 		el.onclick = function(){
-			//console.log(ID,"onClick!");
-			//console.log("el",el);
-
-			// get id
 			var id = el.getAttribute("id");
 			window.actionsManager.pressPiece(id);
 		};
 	}
-	
+
 	var drawTemplate = function(){
-		//console.log("dibuja!");	
-		//document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] <div class="mini-info">' + ID +'</div></div>');
 		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>');
+		//var content = '<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>';
+		//document.getElementById('piecesContainer').innerHTML += content;
 	}
 
 	this.oculta = function(){
@@ -126,5 +120,5 @@ var ficha = function (pieceType){
 	}
 	
 	ficha(pieceType,this);
-	//console.log("pieceType:",pieceType);
+
 }

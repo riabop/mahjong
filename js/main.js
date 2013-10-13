@@ -463,3 +463,6 @@
 
 	createScenario(escenario1);
 	drawStage();
+	thermometer();
+
+	// End of file
