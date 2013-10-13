@@ -15,18 +15,19 @@
 		var win_w = window.innerWidth;
 		var win_h = window.innerHeight;
 
-		PIECE_WIDTH = win_w * 80 / 1240;   // 1240 --> 80
-		PIECE_HEIGHT = win_h * 100 / 840;  // 840 --> 100
+		PIECE_WIDTH = win_w * 80/1240;   // 1240 --> 80
+		PIECE_HEIGHT = PIECE_WIDTH * 100 / 80;  // 840 --> 100  // 80->100 PIECE_WIDTH->x
 		PIECE_THICKNESS = PIECE_HEIGHT * 25/100;
 
 		// relocate background picture.
+		/*
 		var obj = document.getElementById("levelPicture");
 		//console.log("obj.style.width/2:", obj.clientWidth);
 		var x = (win_w / 2) - (obj.clientWidth / 2);
 		var y = (win_h / 2) - (obj.clientHeight / 2);
 		obj.style.top = y + "px";
 		obj.style.left = x + "px";
-		
+		*/
 		scnarioWidth = pieces_width/2 * PIECE_WIDTH + PIECE_WIDTH;
 		scnarioHeight = pieces_height/2 * PIECE_HEIGHT + PIECE_HEIGHT;
 
@@ -50,8 +51,8 @@
 			var objFicha = worldManager.fichasEnJuego[i];
 			objFicha.setPosition(x, y);
 			objFicha.setWidth(PIECE_WIDTH);
-			objFicha.setHeight(PIECE_HEIGHT);
-			worldManager.fichasEnJuego[i].setThickness(PIECE_THICKNESS); // TODO Altura
+			objFicha.setHeight(PIECE_HEIGHT + PIECE_THICKNESS);
+			//worldManager.fichasEnJuego[i].setThickness(PIECE_THICKNESS); // TODO Altura
 		}
 
 		//relocateFichas();
@@ -96,45 +97,36 @@
 	}
 
 	var gameOperations = {
-		selectPiece: function(id) {
-
-			//select the piece
-			var obj = document.getElementById(id);
-			obj.style.border = "3px solid #00FFFF"; //TODO concatenar estilo en vez de toquetearlo!
-			obj.style.background = "#99ffff";
-
-		},
-		unSelectPiece: function(id) {
-
-			//select the piece
-			var obj = document.getElementById(id); //TODO concatenar estilo en vez de toquetearlo!
-			obj.style.border = "1px solid #333";
-			obj.style.background = "#ccc";
-
-		},
 		giveMeThePieceType: function(id) {
 			var obj = document.getElementById(id);
 			return obj.getAttribute("pieceType");
 		},
+		selectPiece: function(id) {
+			var obj = worldManager.giveMeThePiece(id);
+			obj.select();
+		},
+		unSelectPiece: function(id) {
+			var obj = worldManager.giveMeThePiece(id);
+			obj.unselect();
+		},
+
 		destroyPiece: function(id) { // destroy the f***** piece forever!
 			console.log("elimina pieza!");
 			var obj = worldManager.giveMeThePiece(id);
+
+			//worldManager.fichasEnJuego
+			//obj.properties.visible = false;
 			obj.kill();
-
 		},
-
-		// TODO Put this inside the piece code!!!
 		makeDancePieces: function(id,quantum) {
 			/*
 			makeDance(id,100);
 			makeDance(id,75);
 			makeDance(id,50);
 			*/
-
 			var obj = worldManager.giveMeThePiece(id);
 			console.log("working with the piece: ",obj);
 			obj.dance(quantum);
-		
 		},
 		startGame: function() {
 
@@ -155,10 +147,9 @@
 
 			// (1) We get the position of the piece that we wont to destroy.
 			var obj = this.giveMeThePiece(id);
-			var donde_x = obj.properties.mem_x;
-			var donde_y = obj.properties.mem_y;
-			var donde_z = obj.properties.mem_z;
-			console.log("En popsicion", donde_x, donde_y, donde_z);
+			var piece_cliked_x = obj.properties.mem_x;
+			var piece_cliked_y = obj.properties.mem_y;
+			var piece_cliked_z = obj.properties.mem_z;
 
 			/*
 			Once wev got the position we have to generate an array
@@ -167,74 +158,63 @@
 			*/
 
 			// Creamos un array de posiciones de piezas que pueden impedir la seleccion
-			var array_of_problems = [];
-			// Search for pieces at the left and the right
-
-			/*
-				// same z left 
-				var ex_x = donde_x -2;
-				var ex_y = donde_y;
-				var ex_z = donde_z;
-				array_of_problems[7]={x:ex_x,y:ex_y,z:ex_z};
-				
-				// same z right
-				var ex_x = donde_x +2
-				var ex_y = donde_y;
-				var ex_z = donde_z;
-				array_of_problems[8]={x:ex_x,y:ex_y,z:ex_z};
-			*/
+			var arr_pieces_over_the_selected = [];
 
 			// Search for pieces over
 
-				// only one over
-				var ex_x = donde_x;
-				var ex_y = donde_y;
-				var ex_z = donde_z+1;
-				array_of_problems[0]={x:ex_x,y:ex_y,z:ex_z};
+			
+			var ex_x=null, ex_y=null, ex_z = null;
 
-				// two pieces over
-				var ex_x = donde_x-1;
-				var ex_y = donde_y;
-				var ex_z = donde_z+1;
-				array_of_problems[1]={x:ex_x,y:ex_y,z:ex_z};
+			ex_x = piece_cliked_x; // only one over
+			ex_y = piece_cliked_y;
+			ex_z = piece_cliked_z+1;
+			arr_pieces_over_the_selected[0]={x:ex_x,y:ex_y,z:ex_z};
+			
+			ex_x = piece_cliked_x-1; // two pieces over
+			ex_y = piece_cliked_y;
+			ex_z = piece_cliked_z+1;
+			arr_pieces_over_the_selected[1]={x:ex_x,y:ex_y,z:ex_z};
 
-				var ex_x = donde_x+1;
-				var ex_y = donde_y;
-				var ex_z = donde_z+1;
-				array_of_problems[2]={x:ex_x,y:ex_y,z:ex_z};
+			ex_x = piece_cliked_x+1;
+			ex_y = piece_cliked_y;
+			ex_z = piece_cliked_z+1;
+			arr_pieces_over_the_selected[2]={x:ex_x,y:ex_y,z:ex_z};
 
-				// four pieces over
-				var ex_x = donde_x-1;
-				var ex_y = donde_y-1;
-				var ex_z = donde_z+1;
-				array_of_problems[3]={x:ex_x,y:ex_y,z:ex_z};
+			ex_x = piece_cliked_x-1; // four pieces over
+			ex_y = piece_cliked_y-1;
+			ex_z = piece_cliked_z+1;
+			arr_pieces_over_the_selected[3]={x:ex_x,y:ex_y,z:ex_z};
 
-				var ex_x = donde_x+1;
-				var ex_y = donde_y-1;
-				var ex_z = donde_z+1;
-				array_of_problems[4]={x:ex_x,y:ex_y,z:ex_z};
+			ex_x = piece_cliked_x+1;
+			ex_y = piece_cliked_y-1;
+			ex_z = piece_cliked_z+1;
+			arr_pieces_over_the_selected[4]={x:ex_x,y:ex_y,z:ex_z};
 
-				var ex_x = donde_x-1;
-				var ex_y = donde_y+1;
-				var ex_z = donde_z+1;
-				array_of_problems[5]={x:ex_x,y:ex_y,z:ex_z};
+			ex_x = piece_cliked_x-1;
+			ex_y = piece_cliked_y+1;
+			ex_z = piece_cliked_z+1;
+			arr_pieces_over_the_selected[5]={x:ex_x,y:ex_y,z:ex_z};
 
-				var ex_x = donde_x+1;
-				var ex_y = donde_y+1;
-				var ex_z = donde_z+1;
-				array_of_problems[6]={x:ex_x,y:ex_y,z:ex_z};
+			ex_x = piece_cliked_x+1;
+			ex_y = piece_cliked_y+1;
+			ex_z = piece_cliked_z+1;
+			arr_pieces_over_the_selected[6]={x:ex_x,y:ex_y,z:ex_z};
 
 
 			var lon1 = this.fichasEnJuego.length;
-			var lon2 = array_of_problems.length;
-			console.log("fichasEnJuego:",lon1, "array_de_problemas:",lon2);
+			var lon2 = arr_pieces_over_the_selected.length;
 
 			/*
+			console.log("fichasEnJuego:",lon1, "array_de_problemas:",lon2);
 			for (var j = 0; j < lon2; j++) {
-				console.log(array_of_problems[j]);
+				console.log(arr_pieces_over_the_selected[j]);
 			}
 			*/
 			
+			var fichas_arriba = false;
+			var ficha_derecha = 0;
+			var ficha_izquierda = 0;
+
 			for (var i = 0; i < lon1; i++) {
 				
 				var obj = this.fichasEnJuego[i];
@@ -243,92 +223,159 @@
 				var donde_z = obj.properties.mem_z;
 				var donde_visible = obj.properties.visible;
 
-				// fuck!
-				var fichas_arriba = false;
-				var ficha_derecha = false;
-				var ficha_izquierda = false;
 
 				// MIRAR LAS FICHAS DE ARRIBA!
 
-				//console.log(donde_x, ", ", donde_y, ", ", donde_z, ", ", donde_visible);
-				//console.log("-<>-Pieza ",i,"-----------------------------------------");
+				//console.log("-----> ",donde_x, ", ", donde_y, ", ", donde_z, ", ", donde_visible);
+
 				// ver si alguna de las piezas visibles esta en el array de piezas que pueden impedir la seleccion
 				if (donde_visible) {
 					
 					//console.log(donde_x, ", ", donde_y, ", ", donde_z, ", ", donde_visible);
 
 					for (var j = 0; j < lon2; j++) {
-						//console.log(array_of_problems[j]);
+						//console.log(arr_pieces_over_the_selected[j]);
 						
 						/*
 						console.log(donde_x, ", ", donde_y, ", ", donde_z, ", ", donde_visible);
-						console.log(array_of_problems[j].x, ", ", array_of_problems[j].y, ", ", array_of_problems[j].z );
-						console.log( donde_x==array_of_problems[j].x , ", ", donde_y==array_of_problems[j].y , ", ", donde_y==array_of_problems[j].z );
+						console.log(arr_pieces_over_the_selected[j].x, ", ", arr_pieces_over_the_selected[j].y, ", ", arr_pieces_over_the_selected[j].z );
+						console.log( donde_x==arr_pieces_over_the_selected[j].x , ", ", donde_y==arr_pieces_over_the_selected[j].y , ", ", donde_y==arr_pieces_over_the_selected[j].z );
 						*/
 
-						if ( donde_x==array_of_problems[j].x && donde_y==array_of_problems[j].y && donde_z==array_of_problems[j].z ){ 
-							//fichas_arriba = true;
-							console.log("-> Arriba SI hay fichas!");
+
+						if ( donde_x==arr_pieces_over_the_selected[j].x && donde_y==arr_pieces_over_the_selected[j].y && donde_z==arr_pieces_over_the_selected[j].z ){ 
+							//console.log("-> Arriba SI hay fichas!");
 							return true;
 						} else {
-							console.log("-> Arriba NO hay fichas!");
+							//console.log("-> Arriba NO hay fichas!");
 						}
 
 					}	
-				}
+				
 
-				// MIRAR LAS FICHAS DE LOS LADOS
+					// MIRAR LAS FICHAS DE LOS LADOS
 
-				// same z left 
-				var ex_x = donde_x -2;
-				var ex_y = donde_y;
-				var ex_z = donde_z;
-				array_of_problems[7]={x:ex_x,y:ex_y,z:ex_z};
+					// same z left 
+					var ex_x = piece_cliked_x -2;
+					var ex_y = piece_cliked_y;
+					var ex_z = piece_cliked_z;
+					//arr_pieces_over_the_selected[7]={x:ex_x,y:ex_y,z:ex_z};
 
-				if ( donde_x==array_of_problems[7].x && donde_y==array_of_problems[7].y && donde_z==array_of_problems[7].z ){ 
-					ficha_izquierda = true;
-					console.log("-> A la izquierda SI hay ficha!");
-				}else{
-					console.log("-> A la izquierda NO hay ficha!");
-				}
+					//console.log("left ---> arr_pieces_over_the_selected[7]:",arr_pieces_over_the_selected[7]);
 
-				// same z right
-				var ex_x = donde_x +2
-				var ex_y = donde_y;
-				var ex_z = donde_z;
-				array_of_problems[8]={x:ex_x,y:ex_y,z:ex_z};
+					if ( donde_x == ex_x && donde_y == ex_y && donde_z == ex_z ){ 
+						ficha_izquierda++;
+						//console.log("-> A la izquierda SI hay ficha!");
+					}else{
+						//console.log("-> A la izquierda NO hay ficha!");
+					}
 
-				if ( donde_x==array_of_problems[8].x && donde_y==array_of_problems[8].y && donde_z==array_of_problems[8].z ){ 
-					ficha_derecha = true;
-					console.log("-> A la derecha SI hay ficha!");
-				}else{
-					console.log("-> A la derecha NO hay ficha!");
-				}
 
-				if (ficha_izquierda == true && ficha_derecha == true){
-					console.log("-> A derecha e izquierda SI hay ficha!");
-					return true;
-				} else {
-					console.log("-> Solo hay pieza enun lado a derecha o izquierda!");
+
+					var ex_x = piece_cliked_x -2;
+					var ex_y = piece_cliked_y -1;
+					var ex_z = piece_cliked_z;
+					//arr_pieces_over_the_selected[7]={x:ex_x,y:ex_y,z:ex_z};
+
+					//console.log("left ---> arr_pieces_over_the_selected[7]:",arr_pieces_over_the_selected[7]);
+
+					//if ( donde_x == arr_pieces_over_the_selected[7].x && donde_y == arr_pieces_over_the_selected[7].y && donde_z == arr_pieces_over_the_selected[7].z ){ 
+					if ( donde_x == ex_x && donde_y == ex_y && donde_z == ex_z ){ 
+						ficha_izquierda++;
+						//console.log("-> A la izquierda SI hay ficha!");
+					}else{
+						//console.log("-> A la izquierda NO hay ficha!");
+					}
+
+
+					var ex_x = piece_cliked_x -2;
+					var ex_y = piece_cliked_y +1;
+					var ex_z = piece_cliked_z;
+					//arr_pieces_over_the_selected[7]={x:ex_x,y:ex_y,z:ex_z};
+
+					//console.log("left ---> arr_pieces_over_the_selected[7]:",arr_pieces_over_the_selected[7]);
+
+					//if ( donde_x == arr_pieces_over_the_selected[7].x && donde_y == arr_pieces_over_the_selected[7].y && donde_z == arr_pieces_over_the_selected[7].z ){ 
+					if ( donde_x == ex_x && donde_y == ex_y && donde_z == ex_z ){ 
+						ficha_izquierda++;
+						//console.log("-> A la izquierda SI hay ficha!");
+					}else{
+						//console.log("-> A la izquierda NO hay ficha!");
+					}
+
+
+					// same z right
+					var ex_x = piece_cliked_x +2
+					var ex_y = piece_cliked_y;
+					var ex_z = piece_cliked_z;
+					//arr_pieces_over_the_selected[8]={x:ex_x,y:ex_y,z:ex_z};
+
+					//console.log("left ---> arr_pieces_over_the_selected[8]:",arr_pieces_over_the_selected[8]);
+
+					//if ( donde_x == arr_pieces_over_the_selected[8].x && donde_y == arr_pieces_over_the_selected[8].y && donde_z == arr_pieces_over_the_selected[8].z ){ 
+					if ( donde_x == ex_x && donde_y == ex_y && donde_z == ex_z ){ 
+						ficha_derecha++;
+						//console.log("-> A la derecha SI hay ficha!");
+					}else{
+						//console.log("-> A la derecha NO hay ficha!");
+					}
+
+
+					var ex_x = piece_cliked_x +2
+					var ex_y = piece_cliked_y -1;
+					var ex_z = piece_cliked_z;
+					//arr_pieces_over_the_selected[8]={x:ex_x,y:ex_y,z:ex_z};
+
+					//console.log("left ---> arr_pieces_over_the_selected[8]:",arr_pieces_over_the_selected[8]);
+
+					//if ( donde_x == arr_pieces_over_the_selected[8].x && donde_y == arr_pieces_over_the_selected[8].y && donde_z == arr_pieces_over_the_selected[8].z ){ 
+					if ( donde_x == ex_x && donde_y == ex_y && donde_z == ex_z ){ 
+						ficha_derecha++;
+						//console.log("-> A la derecha SI hay ficha!");
+					}else{
+						//console.log("-> A la derecha NO hay ficha!");
+					}
+
+					var ex_x = piece_cliked_x +2
+					var ex_y = piece_cliked_y +1;
+					var ex_z = piece_cliked_z;
+					//arr_pieces_over_the_selected[8]={x:ex_x,y:ex_y,z:ex_z};
+
+					//console.log("left ---> arr_pieces_over_the_selected[8]:",arr_pieces_over_the_selected[8]);
+
+					//if ( donde_x == arr_pieces_over_the_selected[8].x && donde_y == arr_pieces_over_the_selected[8].y && donde_z == arr_pieces_over_the_selected[8].z ){ 
+					if ( donde_x == ex_x && donde_y == ex_y && donde_z == ex_z ){ 
+						ficha_derecha++;
+						//console.log("-> A la derecha SI hay ficha!");
+					}else{
+						//console.log("-> A la derecha NO hay ficha!");
+					}
+
+
 				}
 
 			};
+			
+			console.log("ficha_izquierda:",ficha_izquierda);
+			console.log("ficha_derecha:",ficha_derecha);	
+
+			if (ficha_izquierda > 0 && ficha_derecha > 0){
+				console.log("-> A derecha e izquierda SI hay ficha!");
+				return true;
+			} else {
+				console.log("-> Solo hay pieza enun lado a derecha o izquierda!");
+			}
 
 			return false;
 		},
 		giveMeThePiece: function( desired_id ){
 
-			var lon = this.fichasEnJuego.length;
-			//console.log("fichasEnJuego:",lon);
+			var arr = this.fichasEnJuego;
+			var lon = arr.length;
 			for (var i = 0; i < lon; i++) {
-				if (this.fichasEnJuego[i].properties.id == desired_id){
-					//console.log("Desired piece will be returned!");
-					return this.fichasEnJuego[i];
-				}
+				if (arr[i].properties.id == desired_id) return arr[i];
 			};
-
 			return null; // The desired piece id wasn't found in the world!	
-
 		}
 
 	};
@@ -352,7 +399,9 @@
 			if (gameStatus.firstSelectedPiece === null) {
 
 				//if (1) {
+				//if (!worldManager.isFixed(selected_piece_id)){
 				if (!worldManager.isFixed(selected_piece_id)){
+
 					console.log("(i) Es primera pieza");
 					gameStatus.firstSelectedPiece = selected_piece_id;
 					gameOperations.selectPiece(selected_piece_id);

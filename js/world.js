@@ -216,8 +216,8 @@
 		
 	};
 
-/*
-	var escenario1 = {
+
+	var escenario2 = {
 		type: "scenary",
 		name: "scenary number one",
 		bgPicture: "flowers.jpg",
@@ -229,8 +229,9 @@
 			{x:0, y:4, z:0, pieceType:3},
 			{x:2, y:4, z:0, pieceType:2},
 			{x:4, y:4, z:0, pieceType:1},
-			{x:6, y:4, z:0, pieceType:3},
+			{x:6, y:4, z:0, pieceType:3}
 
+			/*
 			{x:8, y:2, z:0, pieceType:4},
 			{x:10, y:2, z:0, pieceType:4},
 			{x:10, y:0, z:0, pieceType:5},
@@ -245,7 +246,8 @@
 
 			{x:2, y:4, z:2, pieceType:1},
 			{x:4, y:4, z:2, pieceType:3}
+			*/
 		]
 		
 	};
-*/
+

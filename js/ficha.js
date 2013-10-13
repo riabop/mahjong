@@ -46,7 +46,7 @@ var ficha = function (pieceType){
 	var drawTemplate = function(){
 		//console.log("dibuja!");	
 		//document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] <div class="mini-info">' + ID +'</div></div>');
-		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] <div class="mini-info">' + ID +'</div></div>');
+		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>');
 	}
 
 	this.oculta = function(){
@@ -67,10 +67,8 @@ var ficha = function (pieceType){
 	};
 
 	this.setPosition = function(x,y,z){
-		
 		el.style.top = y+"px";
 		el.style.left = x+"px";
-
 		this.properties.screen_x = x;
 		this.properties.screen_y = y;
 		this.properties.screen_z = z;
@@ -97,6 +95,15 @@ var ficha = function (pieceType){
 	this.setThickness = function(t){
 		console.log("t:",t);
 		el.style.borderBottom = t + "px solid #ddd";
+	}
+
+	this.select = function(h){
+		el.style.backgroundPosition = "0 29.5%";  //"position";
+	}
+
+	this.unselect = function(h){
+		//el.style.height = h+"px";
+		el.style.backgroundPosition = "0 0";
 	}
 
 	this.show = function(){

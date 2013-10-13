@@ -1,5 +1,4 @@
 "use strict";
-
 	var set_of_pieces_1 = {
 		type: "clasic",
 		name: "clasic set of pieces",
@@ -7,6 +6,7 @@
 			Bamboos:4, 
 			Characters:4,
 			Circles:2,
+
 			Winds:[
 				{
 					name:"name-1",
