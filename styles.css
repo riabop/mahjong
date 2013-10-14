@@ -23,25 +23,31 @@ body {
 }
 
 .ficha{
+	/*
 	width: 80px;
 	height: 100px;
+	*/
 	background-color: #eee;
 	display: block;	
 
 	border-top: 1px solid #fff;
 	border-right: 2px solid #CCCCCC;
-	border-bottom: 25px solid #ddd;
+	//border-bottom: 25px solid #ddd;
 	border-left: 1px solid #ddd;
 
 	box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.1);
 	border-radius: 3px;
 
 	position: absolute;
+
+	color: #777777;
+    font-size: 10px;
 }
 
 .mini-info{
 	font-family: helvetica;
 	font-size: 9px;
+	display: none;
 }
 
 .ficha:hover{
@@ -50,7 +56,7 @@ body {
 }
 
 
-// splash screen styles
+/* splash screen styles */
 
 #splashScreen{
 	width: 100%;
@@ -58,6 +64,7 @@ body {
 	background-color: #000;
 
     position: absolute;
+    display: none;
     z-index: 99;
 }
 
