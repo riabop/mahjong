@@ -1,5 +1,20 @@
 "use strict";
 
+/*
+
+var App = {};
+
+var stage = {
+	pieces_width:0;
+	pieces_height:0;
+	PIECE_WIDTH:80;
+	PIECE_HEIGHT:100;
+	PIECE_THICKNESS:25;
+	create: function(){},
+	draw: function(){},
+}
+*/
+
 var pieces_width = 0;
 var pieces_height = 0;
 var PIECE_WIDTH = 80;
@@ -138,7 +153,6 @@ var game = {
 	}
 }
 
-
 var actionsManager = {
 
 	pressPiece: function(selected_piece_id, kindOf) {
@@ -224,8 +238,27 @@ var actionsManager = {
 	}
 };
 
-//router.init();
-//splashScreen.show();
-game.startGame();
+var router = {
+	init: function(){
+		this.goTo("splashScreen");	
+	},
+	goTo: function(whereToGo){
+		switch(whereToGo){
+			case "splashScreen":
+				console.log("router.splashScreen");
+				//splashScreen.show();
+				this.goTo("mainMenu");
+				break;
+			case "mainMenu":
+				console.log("router.mainMenu");
+				this.goTo("playGame");
+				break;
+			case "playGame":
+				game.startGame();
+				break; 
+		}
+	}
+	
+}
 
-// End of file
+router.init();
