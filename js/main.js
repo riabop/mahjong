@@ -238,6 +238,39 @@ var actionsManager = {
 	}
 };
 
+var splashScreen = {
+	show: function(){
+		this.fadeOut();
+	},
+	fadeOut: function(){
+
+		var i = 1;
+		var animate = function() {
+		  	i-=0.05;
+		  	if (i < 0) {
+		  		window.cancelAnimationFrame(movId); // TODO Send a callback when finish
+		  		obj.style.display = "none";
+	  			movId = 0;
+	  			//finish();
+		  	}
+
+		  	obj.style.opacity = i;
+		  	//console.log(obj,", ",i);
+		  	movId = window.requestAnimationFrame(animate);
+		};
+
+		/*
+		var finish = function(){
+			console.log("The splash screen is hidden!");
+		}
+		*/
+
+		var obj = document.getElementById("splashScreen");
+		var movId = window.requestAnimationFrame(animate);
+	}
+
+};
+
 var router = {
 	init: function(){
 		this.goTo("splashScreen");	
@@ -246,7 +279,7 @@ var router = {
 		switch(whereToGo){
 			case "splashScreen":
 				console.log("router.splashScreen");
-				//splashScreen.show();
+				splashScreen.show(); 
 				this.goTo("mainMenu");
 				break;
 			case "mainMenu":
