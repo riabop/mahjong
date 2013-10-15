@@ -1,6 +1,6 @@
 	"use strict";
 
-	var escenario1 = {
+	var escenario2 = {
 		type: "scenary",
 		name: "scenary number one",
 		bgPicture: "flowers.jpg",
@@ -217,7 +217,7 @@
 	};
 
 
-	var escenario2 = {
+	var escenario1 = {
 		type: "scenary",
 		name: "scenary number one",
 		bgPicture: "flowers.jpg",
