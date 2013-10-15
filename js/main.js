@@ -251,16 +251,24 @@ var splashScreen = {
 		  		window.cancelAnimationFrame(movId); // TODO Send a callback when finish
 		  		obj.style.display = "none";
 	  			movId = 0;
+	  			//finish();
 		  	}
+
 		  	obj.style.opacity = i;
 		  	//console.log(obj,", ",i);
 		  	movId = window.requestAnimationFrame(animate);
 		};
 
+		/*
+		var finish = function(){
+			console.log("The splash screen is hidden!");
+		}
+		*/
+
 		var obj = document.getElementById("splashScreen");
-		//console.log(obj);
 		var movId = window.requestAnimationFrame(animate);
 	}
+
 };
 
 var router = {
