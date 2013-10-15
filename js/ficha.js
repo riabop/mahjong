@@ -1,15 +1,15 @@
 "use strict";
 
-var ficha = function (pieceType){
+var piece = function (pieceType){
 
 	var createID = function(){
 		var timestamp = new Date().getTime();
 		var randomNumber = Math.ceil(Math.random()*100000);
 		return type + "_" + timestamp + "_" + randomNumber;	
-	}
+	};
 
 	var ID = createID();
-	var type = "ficha";
+	var type = "piece";
 	var el = null;
 
 	this.properties = {
@@ -24,7 +24,7 @@ var ficha = function (pieceType){
 		mem_z:null
 	}
 
-	var ficha = function(pieceType,self){
+	var piece = function(pieceType,self){
 
 		console.log("initialize object ", ID);
 		drawTemplate();
@@ -38,14 +38,14 @@ var ficha = function (pieceType){
 	}
 
 	var drawTemplate = function(){
-		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>');
-		//var content = '<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>';
+		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="piece" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>');
+		//var content = '<div id="'+ ID +'" pieceType="'+pieceType+'" class="piece" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>';
 		//document.getElementById('piecesContainer').innerHTML += content;
-	}
+	};
 
 	this.oculta = function(){
 		//console.log("oculta!");	
-	}
+	};
 
 	this.getType = function(){
 		return pieceType;
@@ -76,11 +76,11 @@ var ficha = function (pieceType){
 
 	this.setWidth = function(w){
 		el.style.width = w+"px";
-	}
+	};
 
 	this.setHeight = function(h){
 		el.style.height = h+"px";
-	}
+	};
 	
 	this.setStatus = function(status){
 		// ON or visible... 
@@ -89,36 +89,36 @@ var ficha = function (pieceType){
 	this.setThickness = function(t){
 		console.log("t:",t);
 		el.style.borderBottom = t + "px solid #ddd";
-	}
+	};
 
 	this.select = function(h){
 		el.style.backgroundPosition = "0 29.5%";  //"position";
-	}
+	};
 
 	this.unselect = function(h){
 		//el.style.height = h+"px";
 		el.style.backgroundPosition = "0 0";
-	}
+	};
 
 	this.show = function(){
 		el.style.display = null;
 		this.properties.visible = true;
-	}
+	};
 
 	this.hide = function(){
 		el.style.display = "none";
 		this.properties.visible = false;
-	}
+	};
 
 	this.kill = function(){
 		//console.log("this.kill");
 		this.hide();
-	}
+	};
 
 	this.dance = function(quantum){
 		console.log("This piece is dancing ",quantum);
-	}
+	};
 	
-	ficha(pieceType,this);
+	piece(pieceType,this);
 
 }

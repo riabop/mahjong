@@ -1,6 +1,6 @@
 var worldManager = {
 
-	fichasEnJuego: [], 
+	levelPieces: [], 
 
 	/* This function will be used to know when a piece cant be deleted */
 	isFixed: function(id) {
@@ -62,23 +62,22 @@ var worldManager = {
 		arr_pieces_over_the_selected[6]={x:ex_x,y:ex_y,z:ex_z};
 
 
-		var lon1 = this.fichasEnJuego.length;
+		var lon1 = this.levelPieces.length;
 		var lon2 = arr_pieces_over_the_selected.length;
 
 		/*
-		console.log("fichasEnJuego:",lon1, "array_de_problemas:",lon2);
+		console.log("levelPieces:",lon1, "array_de_problemas:",lon2);
 		for (var j = 0; j < lon2; j++) {
 			console.log(arr_pieces_over_the_selected[j]);
 		}
 		*/
 		
-		var fichas_arriba = false;
 		var rightPiece = 0;
 		var leftPiece = 0;
 
 		for (var i = 0; i < lon1; i++) {
 			
-			var obj = this.fichasEnJuego[i];
+			var obj = this.levelPieces[i];
 			var where_x = obj.properties.mem_x;
 			var where_y = obj.properties.mem_y;
 			var where_z = obj.properties.mem_z;
@@ -216,14 +215,14 @@ var worldManager = {
 			console.log("-> A derecha e izquierda SI hay ficha!");
 			return true;
 		} else {
-			console.log("-> Solo hay pieza enun lado a derecha o izquierda!");
+			console.log("-> Solo hay pieza en un lado a derecha o izquierda!");
 		}
 
 		return false;
 	},
 	giveMeThePiece: function( desired_id ){
 
-		var arr = this.fichasEnJuego;
+		var arr = this.levelPieces;
 		var lon = arr.length;
 		for (var i = 0; i < lon; i++) {
 			if (arr[i].properties.id == desired_id) return arr[i];
