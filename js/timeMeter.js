@@ -40,27 +40,18 @@ var timeMeter = function (){
 	var j= 400;
 
 	var animate = function(time)  {
-
-	  	j-=5;
+	  	j-=0.5;
 	  	if (j < 0) {
-	  		//console.log("Time is up!");
 	  		game.timeIsUp();
-	  		stop();
+	  	}else{
+	  		document.getElementById("time").style.height=j + "px";
+	  		movId = window.requestAnimationFrame(animate);
 	  	}
-
-	  	document.getElementById("time").style.height=j + "px";
-	  	movId = window.requestAnimationFrame(animate);
 	};
 
 	var start = function() {
 	  	movId = window.requestAnimationFrame(animate);
 	};
-
-	var stop = function() {
-	  	if (movId)
-	    window.cancelAnimationFrame(movId);
-	  	movId = 0;
-	}
 
 	timeMeter(this);
 

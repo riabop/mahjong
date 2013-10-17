@@ -58,7 +58,7 @@ var drawStage = function() {
 
 	var upon_the_screen_x = PIECE_WIDTH/2;
 	var upon_the_screen_y = PIECE_HEIGHT/2;
-
+	//var content = "";
 	var lon = worldManager.levelPieces.length;
 	for (var i = 0; i < lon; i++) {
 		var x = escenario1.positions[i].x * upon_the_screen_x + desp_x;
@@ -79,13 +79,14 @@ window.onresize = function(event) {
 	//console.log("width:", window.innerWidth, ", height:", window.innerHeight);
 	drawStage();
 }
-
+//content = content + procesado;
 /* 
 	This function creates a virtual stage reading the world json 
 */
 var createStage = function(scn) { // Here the pieces are created, we create new objects
 
 	var lon = scn.positions.length;
+	
 	for (var i = 0; i < lon; i++) {
 		worldManager.levelPieces[i] = new piece(scn.positions[i].pieceType);
 		var x = scn.positions[i].x;
@@ -95,8 +96,11 @@ var createStage = function(scn) { // Here the pieces are created, we create new 
 		//worldManager.levelPieces[i].setPosition(x * PIECE_WIDTH, y * PIECE_HEIGHT, z);
 		worldManager.levelPieces[i].show();
 
+
 		if (pieces_width < x) pieces_width = x;
 		if (pieces_height < y) pieces_height = y;
+
+		
 	}
 
 	//console.log("pieces_width:",pieces_width,", pieces_height:",pieces_height);
@@ -246,24 +250,16 @@ var splashScreen = {
 
 		var i = 1;
 		var animate = function() {
-		  	i-=0.05;
+		  	i-=0.01;
 		  	if (i < 0) {
 		  		window.cancelAnimationFrame(movId); // TODO Send a callback when finish
 		  		obj.style.display = "none";
-	  			movId = 0;
-	  			//finish();
-		  	}
-
-		  	obj.style.opacity = i;
-		  	//console.log(obj,", ",i);
-		  	movId = window.requestAnimationFrame(animate);
+	  			console.log("splashScreen fadeOut is over!");
+		  	} else {
+		  		obj.style.opacity = i;
+		  		movId = window.requestAnimationFrame(animate);
+		    }
 		};
-
-		/*
-		var finish = function(){
-			console.log("The splash screen is hidden!");
-		}
-		*/
 
 		var obj = document.getElementById("splashScreen");
 		var movId = window.requestAnimationFrame(animate);
