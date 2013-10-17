@@ -8,9 +8,10 @@ var piece = function (pieceType){
 		return type + "_" + timestamp + "_" + randomNumber;	
 	};
 
-	var ID = createID();
+	
 	var type = "piece";
 	var el = null;
+	var ID = createID();
 
 	this.properties = {
 		id: ID,
@@ -38,9 +39,10 @@ var piece = function (pieceType){
 	}
 
 	var drawTemplate = function(){
-		document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="piece" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>');
-		//var content = '<div id="'+ ID +'" pieceType="'+pieceType+'" class="piece" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>';
+		//document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="piece" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>');
+		var content = '<div id="'+ ID +'" pieceType="'+pieceType+'" class="piece" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>';
 		//document.getElementById('piecesContainer').innerHTML += content;
+		document.getElementById('piecesContainer').insertAdjacentHTML('beforeend', content); //appendChild(content);
 	};
 
 	this.oculta = function(){
