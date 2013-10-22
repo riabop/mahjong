@@ -64,9 +64,12 @@ var drawStage = function() {
 		var x = escenario1.positions[i].x * upon_the_screen_x + desp_x;
 		var y = escenario1.positions[i].y * upon_the_screen_y + desp_y - (PIECE_THICKNESS * escenario1.positions[i].z);
 		var objFicha = worldManager.levelPieces[i];
+		objFicha.setValues(x, y, PIECE_WIDTH, PIECE_HEIGHT, PIECE_THICKNESS);
+		/*
 		objFicha.setPosition(x, y);
 		objFicha.setWidth(PIECE_WIDTH);
 		objFicha.setHeight(PIECE_HEIGHT + PIECE_THICKNESS);
+		*/
 		//worldManager.levelPieces[i].setThickness(PIECE_THICKNESS); // TODO Altura
 	}
 

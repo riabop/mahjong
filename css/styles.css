@@ -39,6 +39,12 @@ body {
 	background-position: 0 88.9%;
 }
 
+.pieceImage{
+	background-image: url("../imgs/setOfPieces_simple/pieces.png");
+	height: 100%;
+    width: 100%;
+}
+
 /* splash screen styles */
 
 #splashScreen{

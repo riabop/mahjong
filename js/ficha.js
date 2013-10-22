@@ -12,6 +12,7 @@ var piece = function (pieceType){
 	var type = "piece";
 	var el = null;
 	var ID = createID();
+	var img = null;
 
 	this.properties = {
 		id: ID,
@@ -30,6 +31,7 @@ var piece = function (pieceType){
 		console.log("initialize object ", ID);
 		drawTemplate();
 		el = document.getElementById(ID);
+		img = el.childNodes[0]; //child[0];
 		self.properties.el = el;
 
 		el.onclick = function(){
@@ -40,7 +42,7 @@ var piece = function (pieceType){
 
 	var drawTemplate = function(){
 		//document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="piece" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>');
-		var content = '<div id="'+ ID +'" pieceType="'+pieceType+'" class="piece" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>';
+		var content = '<div id="'+ ID +'" pieceType="'+pieceType+'" class="piece" style="top:0px; left:0px; display:none; opacity:1"><div id="pieceImage" class="pieceImage"></div> [' + pieceType+ '] </div>';
 		//document.getElementById('piecesContainer').innerHTML += content;
 		document.getElementById('piecesContainer').insertAdjacentHTML('beforeend', content); //appendChild(content);
 	};
@@ -53,6 +55,7 @@ var piece = function (pieceType){
 		return pieceType;
 	};
 
+	/*
 	this.selectTicha = function(){
 		console.log("select ".el);
 		el.style.border = "3px solid blue";
@@ -61,6 +64,7 @@ var piece = function (pieceType){
 	this.unselect = function(){
 		
 	};
+	*/
 
 	this.setPosition = function(x,y,z){
 		el.style.top = y+"px";
@@ -79,19 +83,30 @@ var piece = function (pieceType){
 	this.setWidth = function(w){
 		el.style.width = w+"px";
 	};
+	/*
+	this.setImage = function(w){
+		img.style.backgroundSize= w * 9 + "px auto";
+		img.style.backgroundPosition= -w * pieceType + "px 0";
+	};
+	*/
 
 	this.setHeight = function(h){
 		el.style.height = h+"px";
-	};
-	
-	this.setStatus = function(status){
-		// ON or visible... 
 	};
 
 	this.setThickness = function(t){
 		console.log("t:",t);
 		el.style.borderBottom = t + "px solid #ddd";
 	};
+
+	this.setValues = function(x,y,w,h,t){
+		this.setPosition(x,y);
+		this.setWidth(w);
+		this.setHeight(h+t);
+		img.style.backgroundSize= w * 9 + "px "+ (h+t) * 6 + "px ";
+		img.style.backgroundPosition= -w * pieceType + "px 0";
+		img.style.height= h + "px ";
+	}
 
 	this.select = function(h){
 		el.style.backgroundPosition = "0 29.5%";  //"position";
