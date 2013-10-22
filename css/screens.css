@@ -1,0 +1,141 @@
+
+/* ----------------------
+   Splash screen styles 
+------------------------- */
+
+#splashScreen{
+	width: 100%;
+	height: 100%;
+	background-color: #0f0;
+    position: absolute;
+    display: block;
+    opacity: 1;
+    z-index: 99;
+
+    display: block;
+}
+
+/* ----------------------
+   mainMenu screen styles 
+------------------------- 
+
+	<div id="mainMenu">
+		<div class="btnGroup">
+			<div id="btnSound"></div>
+			<div id="btnPlay"></div>
+		</div>
+	</div>
+*/
+
+#mainMenu {
+    background-color: #0000FF;
+    background-image: url("../imgs/main-menu.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    display: none;
+    height: 100%;
+    opacity: 1;
+    position: absolute;
+    width: 100%;
+    z-index: 98;
+}
+
+.btnGroup{
+    margin: auto;
+    position: relative;
+    text-align: center;
+    top: 70%;
+    width: 50%;
+}
+
+#btnSound{
+	background-color: #0ff;
+	border: 7px solid #fff;
+	border-radius: 10px;
+	padding: 10px;
+	font-family: helvetica;
+	font-weight: bold;
+	text-align: center;
+	font-size: 2em;
+	box-shadow: 2px 2px 20px;
+	display: inline-block;
+	cursor: pointer;
+}
+#btnSound:hover{
+	background-color: #ff0;
+}
+#btnPlay{
+	background-color: #0ff;
+	border: 7px solid #fff;
+	border-radius: 10px;
+	padding: 10px;
+	font-family: helvetica;
+	font-weight: bold;
+	text-align: center;
+	font-size: 2em;
+	box-shadow: 2px 2px 20px;
+	display: inline-block;
+	cursor: pointer;
+}
+#btnPlay:hover{
+	background-color: #ff0;
+}
+
+/* --------------------------
+   choose Level screen styles 
+----------------------------- */
+
+#chooseLevel {
+	width: 100%;
+	height: 100%;
+	background-color: #f00;
+    position: absolute;
+    display: block;
+    opacity: 1;
+    z-index: 97;
+
+    display: none;
+}
+
+.btnLvl{
+	background-color: #0ff;
+	border: 7px solid #fff;
+	border-radius: 10px;
+	padding: 10px;
+	font-family: helvetica;
+	font-weight: bold;
+	text-align: center;
+	font-size: 2em;
+	box-shadow: 2px 2px 20px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.btnLvl:hover{
+	background-color: #ff0;
+}
+
+/* cancel game button */
+
+#btnCancelGame{
+	background-color: #0ff;
+	border: 7px solid #fff;
+	border-radius: 10px;
+	padding: 10px;
+	font-family: helvetica;
+	font-weight: bold;
+	text-align: center;
+	font-size: 2em;
+	box-shadow: 2px 2px 20px;
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	float: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+#btnCancelGame:hover{
+	background-color: #ff0;
+}

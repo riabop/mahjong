@@ -1,9 +1,10 @@
 	"use strict";
 
-	var escenario2 = {
+	var escenario3 = {
 		type: "scenary",
 		name: "scenary number one",
 		bgPicture: "flowers.jpg",
+		time: 120, // 120 segundos
 
 		// Double!!!
 		positions: [
@@ -216,11 +217,11 @@
 		
 	};
 
-
-	var escenario1 = {
+	var escenario2 = {
 		type: "scenary",
 		name: "scenary number one",
 		bgPicture: "flowers.jpg",
+		time: 60, // 60 segundos
 
 		// Double!!!
 		positions: [
@@ -247,6 +248,37 @@
 			{x:2, y:4, z:2, pieceType:1},
 			{x:4, y:4, z:2, pieceType:3}
 			*/
+		]
+		
+	};
+
+	var escenario1 = {
+		type: "scenary",
+		name: "scenary number one",
+		bgPicture: "flowers.jpg",
+		time: 60, // 60 segundos
+		positions: [
+			{x:0, y:0, z:0, pieceType:1},
+			{x:0, y:2, z:0, pieceType:2},
+			{x:0, y:4, z:0, pieceType:3},
+			{x:2, y:4, z:0, pieceType:2},
+			{x:4, y:4, z:0, pieceType:1},
+			{x:6, y:4, z:0, pieceType:3},
+
+			{x:8, y:2, z:0, pieceType:4},
+			{x:10, y:2, z:0, pieceType:4},
+			{x:10, y:0, z:0, pieceType:5},
+			{x:12, y:2, z:0, pieceType:5},
+			{x:8, y:6, z:0, pieceType:2},
+
+			{x:0, y:0, z:1, pieceType:1},
+			{x:0, y:2, z:1, pieceType:2},
+			{x:1, y:4, z:1, pieceType:4},
+			{x:3, y:4, z:1, pieceType:5},
+			{x:5, y:4, z:1, pieceType:3},
+
+			{x:2, y:4, z:2, pieceType:1},
+			{x:4, y:4, z:2, pieceType:3}
 		]
 		
 	};
