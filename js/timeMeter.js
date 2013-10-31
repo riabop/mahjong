@@ -1,58 +1,132 @@
 "use strict";
 
-var timeMeter = function (){
-
-	var createID = function(){
-		var timestamp = new Date().getTime();
-		var randomNumber = Math.ceil(Math.random()*100000);
-		return type + "_" + timestamp + "_" + randomNumber;	
-	};
-	
-	var type = "timeMeter";
-	var ID = createID();
-	var el = null;
-
-
-	
-
-	var timeMeter = function(pieceType,self){
-		console.log("initialize object ", ID);
-		drawTemplate();
-		start();
-
-		/*
-		el = document.getElementById(ID);
-		self.properties.el = el;
-		el.onclick = function(){
-			var id = el.getAttribute("id");
-			window.actionsManager.pressPiece(id);
-		};
-		*/
-	};
-
-	var drawTemplate = function(){
-		//document.write('<div id="'+ ID +'" pieceType="'+pieceType+'" class="ficha" style="top:0px; left:0px; display:none; opacity:1"> [' + pieceType+ '] </div>');
-		//var content = '<div id="'+ ID +'" type="'+type+'" class="timeMeter" style=" top:0px; left:0px; opacity:1 "></div>';
-		//document.getElementById('timeMeterContainer').innerHTML += content;
-	};
+App.timeMeter = function (){
 
 	var movId;
-	var j= 400;
+
+	var maxTime = 0;
+	var nowTime = 0;
+	var ini_milsec = 0;
+	var end_milsec = 0;
+	var flag50=0;
+	var flag75=0;
+	var flag90=0;
+	var flag100=0;
+	var lastTime = 0;
+	var totalTime = 0;
+	var total_diference;
+	var flag_timeUp = false;
+	var go = false;
 
 	var animate = function(time)  {
-	  	j-=0.5;
-	  	if (j < 0) {
-	  		game.timeIsUp();
-	  	}else{
-	  		document.getElementById("time").style.height=j + "px";
-	  		movId = window.requestAnimationFrame(animate);
+
+		var rightNow = new Date().getTime();
+		if ((rightNow - lastTime)>1000){
+
+			// update count down display
+			if (nowTime >= 0){ 
+				document.getElementById('minutes').innerHTML = nowTime;
+				nowTime -= 1;
+			}
+
+			lastTime = rightNow;
+			
+			// update main time display
+			document.getElementById('mainTime').innerHTML = totalTime;
+			totalTime++;
+		}
+	   	
+	   	var diference_percntage;
+
+	   	if (!flag_timeUp){
+		   	if (nowTime  < 0){ //&& flag100 == 0
+		  		console.log("Yow wasted all your time! You are a loser!");
+		  		flag_timeUp = true;
+		  		//go = false;
+		  		game.timeIsUp();
+		  	} else {
+				var now_diference = end_milsec - rightNow;
+				diference_percntage = (now_diference * 100) / total_diference;
+				var h = diference_percntage * 4;
+		  		document.getElementById("time").style.height= h + "px";
+		  		//movId = window.requestAnimationFrame(animate);
+		  	}
 	  	}
+
+	  	if (diference_percntage < 50 && flag50 == 0) {
+	  		console.log("Yow wasted 50% of your time!");
+	  		var obj = document.getElementById("star60");
+	  		obj.style.backgroundPosition = "0px -60px";
+	  		flag50 = 1;
+	  	};
+	  	
+	  	if (diference_percntage < 25 && flag75 == 0) {
+	  		console.log("Yow wasted 75% of your time!");
+	  		var obj = document.getElementById("star80");
+	  		obj.style.backgroundPosition = "0px -60px";
+	  		flag75 = 1;
+	  	};
+
+	  	if (diference_percntage < 10 && flag90 == 0) {
+	  		console.log("Yow wasted 90% of your time!");
+	  		var obj = document.getElementById("star95");
+	  		obj.style.backgroundPosition = "0px -60px";
+	  		flag90 = 1;
+	  	}
+
+	  	if (go) movId = window.requestAnimationFrame(animate);
 	};
 
-	var start = function() {
+	this.reset = function(seconds) {
+
+		maxTime = seconds;
+		nowTime = maxTime;
+	  	console.log("App.timeMeter.reset() miliseconds:",seconds);
+	  	totalTime = 0;
+
+  		var obj = document.getElementById("star60");
+  		obj.style.backgroundPosition = "0px 0px";
+  		flag50 = 0;
+
+  		var obj = document.getElementById("star80");
+  		obj.style.backgroundPosition = "0px 0px";
+  		flag75 = 0;
+
+  		var obj = document.getElementById("star95");
+  		obj.style.backgroundPosition = "0px 0px";
+  		flag90 = 0;
+
+  		//flag100 = 0;
+  		flag_timeUp = false;
+
+  		document.getElementById('minutes').innerHTML = maxTime;
+  		document.getElementById('mainTime').innerHTML = 0;
+	  	
+	};
+
+	this.start = function() {
+		console.log("App.timeMeter.start()");
+
+		ini_milsec = new Date().getTime();
+		end_milsec = ini_milsec + (maxTime * 1000);
+		total_diference = end_milsec - ini_milsec;
+
+		console.log("ini_milsec:",ini_milsec);
+		console.log("end_milsec:",end_milsec);
+		console.log("total_diference:",total_diference);
+		
+		go = true;
 	  	movId = window.requestAnimationFrame(animate);
 	};
 
-	timeMeter(this);
+	var pause = function() {
+		console.log("App.timeMeter.pause()");
+		go = false;
+	};
+
+	var stop = function() {
+		console.log("App.timeMeter.stop()");
+		go = false;
+	};
 
 }
