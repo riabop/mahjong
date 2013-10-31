@@ -25,7 +25,6 @@ var worldManager = {
 
 		// Search for pieces over
 
-
 		var ex_x = null,
 			ex_y = null,
 			ex_z = null;
@@ -119,8 +118,8 @@ var worldManager = {
 			// Searching for pieces upon the selected ...
 
 			//console.log("-----> ",where_x, ", ", where_y, ", ", where_z, ", ", where_visible);
-
-			// ver si alguna de las piezas visibles esta en el array de piezas que pueden impedir la seleccion
+			
+			// We need to know if we've got pieces around the selected one in order to cancel the selecting piece process.
 			if (where_visible) {
 
 				//console.log(where_x, ", ", where_y, ", ", where_z, ", ", where_visible);
@@ -135,14 +134,13 @@ var worldManager = {
 					*/
 
 					if (where_x == arr_pieces_over_the_selected[j].x && where_y == arr_pieces_over_the_selected[j].y && where_z == arr_pieces_over_the_selected[j].z) {
-						//console.log("-> Arriba SI hay fichas!");
+						//console.log("-> There are upper pieces!");
 						return true;
 					} else {
-						//console.log("-> Arriba NO hay fichas!");
+						//console.log("-> There aren't upper pieces!");
 					}
 
 				}
-
 
 				// Searching for pieces on the right and left ...
 
@@ -156,9 +154,9 @@ var worldManager = {
 
 				if (where_x == ex_x && where_y == ex_y && where_z == ex_z) {
 					leftPiece++;
-					//console.log("-> A la izquierda SI hay ficha!");
+					//console.log("-> There is a piece at the left!");
 				} else {
-					//console.log("-> A la izquierda NO hay ficha!");
+					//console.log("-> There isn't a piece at the left!");
 				}
 
 				var ex_x = selectedPiece_x - 2;
@@ -166,11 +164,10 @@ var worldManager = {
 				var ex_z = selectedPiece_z;
 				if (where_x == ex_x && where_y == ex_y && where_z == ex_z) {
 					leftPiece++;
-					//console.log("-> A la izquierda SI hay ficha!");
+					//console.log("-> There is a piece at the left!");
 				} else {
-					//console.log("-> A la izquierda NO hay ficha!");
+					//console.log("-> There isn't a piece at the left!");
 				}
-
 
 				var ex_x = selectedPiece_x - 2;
 				var ex_y = selectedPiece_y + 1;
@@ -182,11 +179,10 @@ var worldManager = {
 				//if ( where_x == arr_pieces_over_the_selected[7].x && where_y == arr_pieces_over_the_selected[7].y && where_z == arr_pieces_over_the_selected[7].z ){ 
 				if (where_x == ex_x && where_y == ex_y && where_z == ex_z) {
 					leftPiece++;
-					//console.log("-> A la izquierda SI hay ficha!");
+					//console.log("-> There is a piece at the left!");
 				} else {
-					//console.log("-> A la izquierda NO hay ficha!");
+					//console.log("-> There isn't a piece at the left!");
 				}
-
 
 				// same z right
 				var ex_x = selectedPiece_x + 2
@@ -199,11 +195,10 @@ var worldManager = {
 				//if ( where_x == arr_pieces_over_the_selected[8].x && where_y == arr_pieces_over_the_selected[8].y && where_z == arr_pieces_over_the_selected[8].z ){ 
 				if (where_x == ex_x && where_y == ex_y && where_z == ex_z) {
 					rightPiece++;
-					//console.log("-> A la derecha SI hay ficha!");
+					//console.log("-> There is a piece at the right!");
 				} else {
-					//console.log("-> A la derecha NO hay ficha!");
+					//console.log("-> There isn't a piece at the right!");
 				}
-
 
 				var ex_x = selectedPiece_x + 2
 				var ex_y = selectedPiece_y - 1;
@@ -215,9 +210,9 @@ var worldManager = {
 				//if ( where_x == arr_pieces_over_the_selected[8].x && where_y == arr_pieces_over_the_selected[8].y && where_z == arr_pieces_over_the_selected[8].z ){ 
 				if (where_x == ex_x && where_y == ex_y && where_z == ex_z) {
 					rightPiece++;
-					//console.log("-> A la derecha SI hay ficha!");
+					//console.log("-> There is a piece at the right!");
 				} else {
-					//console.log("-> A la derecha NO hay ficha!");
+					//console.log("-> There isn't a piece at the right!");
 				}
 
 				var ex_x = selectedPiece_x + 2
@@ -230,11 +225,10 @@ var worldManager = {
 				//if ( where_x == arr_pieces_over_the_selected[8].x && where_y == arr_pieces_over_the_selected[8].y && where_z == arr_pieces_over_the_selected[8].z ){ 
 				if (where_x == ex_x && where_y == ex_y && where_z == ex_z) {
 					rightPiece++;
-					//console.log("-> A la derecha SI hay ficha!");
+					//console.log("-> There is a piece at the right!"); 
 				} else {
-					//console.log("-> A la derecha NO hay ficha!");
+					//console.log("-> There isn't a piece at the right!"); 
 				}
-
 
 			}
 
@@ -244,10 +238,10 @@ var worldManager = {
 		console.log("rightPiece:", rightPiece);
 
 		if (leftPiece > 0 && rightPiece > 0) {
-			console.log("-> A derecha e izquierda SI hay ficha!");
+			console.log("-> There are pieces at the left and at the right!");
 			return true;
 		} else {
-			console.log("-> Solo hay pieza en un lado a derecha o izquierda!");
+			console.log("-> There is only a piece at the left or at the right!");
 		}
 
 		return false;
@@ -264,58 +258,85 @@ var worldManager = {
 	countAvailablePieces: function(){
 
 		var lon1 = this.levelPieces.length;
+		var piecesLeft = [];
 
 		var cont = 0;
 		for (var i = 0; i < lon1; i++) {
 
 			var obj = this.levelPieces[i];
+
 			/*
 			var where_x = obj.properties.mem_x;
 			var where_y = obj.properties.mem_y;
 			var where_z = obj.properties.mem_z;
 			*/
+
 			var where_visible = obj.properties.visible;
+			var pieceType = obj.getType();
 
 			// Searching for pieces upon the selected ...
 			//console.log("-----> ",where_x, ", ", where_y, ", ", where_z, ", ", where_visible);
+			//console.log("getType:",pieceType );
+			// create array of visible pieces
 
-			// ver si alguna de las piezas visibles esta en el array de piezas que pueden impedir la seleccion
+			
 			if (where_visible) {
 				cont++;
+				
+				/*
+				if (isNaN(piecesLeft[pieceType-1])){
+					piecesLeft[pieceType-1] = 1;
+				}else{
+					piecesLeft[pieceType-1] +=1;
+				}
+				*/
+				
 			}
 
 
+			//console.log("piecesLeft.length:",piecesLeft.length);
+
+			// Fill NaN values with 0
+			
+			/*			
+			for (var i = 0; i < piecesLeft.length; i++) {
+				//typeof something === "undefined"
+				if (typeof piecesLeft[pieceType] === "undefined") {
+					piecesLeft[pieceType] = 0;
+				}
+			};
+			*/			
+
 		};
 
+		//console.log("piecesLeft:", piecesLeft);
 
 		if (cont == 0) {
-			console.log("Se acabaron las fichas");
+			console.log("We dont have pieces!");
 			
-		} else { // Hay fichas en el tablero
+		} else { // There are more pieces
 			
-			if (cont = 1) {
-				console.log(" Queda una sola ficha!");
+			if (cont == 1) {
+				console.log("There is only one piece!");
 
-			} else { // Hay mas de una ficha!
-				
-				if (cont = 1) {
-					console.log(" Queda una sola ficha!");
-				} else {
-					// Hay mas de una ficha!
+			} else { // There are more than one pieces
+
+				if (1) { //areThereCouples()
+					console.log("There are couples!");
+					
 					/*
-					Si (hayParejas) {
-	
-						Si (sonSeleccionables){
-	
-						} else {
-							// dlg sufle de las piezas
-						}
+					if (areThereMoovments()){
 
-					}else{
-						// No hay parejas
+					} else {
+						
 					}
 					*/
-				};
+
+				}else{
+					console.log("There aren't couples!");
+
+				}	
+
 			};
 		};
 		
