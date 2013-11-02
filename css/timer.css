@@ -1,0 +1,112 @@
+
+/* Time meter styles */
+
+#timeContainer{
+	position: absolute;
+	top: 0px;
+	left: 10px;
+}
+
+#timeMeter{
+    background: none repeat scroll 0 0 #CCCCCC;
+    border: 2px solid #FFFFFF;
+    color: #CCCCCC;
+    display: block;
+    height: 400px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 40px;
+    width: 30px;
+    border-radius: 30px;
+}
+
+#time{ 
+    background: none repeat scroll 0 0 #FF0000;
+    bottom: 0;
+    display: block;
+    height: 356px;
+    left: 0;
+    position: absolute;
+    width: 30px;
+}
+#mainTime {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    color: #FFFFFF;
+    display: block;
+    font-family: times;
+    font-size: 70px;
+    height: 50px;
+    left: 25%;
+    margin: 10px auto 0;
+    position: absolute;
+    text-align: center;
+    text-indent: 0;
+    text-shadow: 2px 2px 1px #FF0000;
+    top: 0;
+    width: 50%;
+}
+.star{
+    background-color: none;
+    height: 50px;
+    left: 40px;
+    position: absolute;
+    width: 50px;
+}
+
+.star-1{
+	top: 210px;
+	background-image: url("../imgs/star.png");
+	background-position: 0 0;
+}
+.star-2{
+	top: 310px;	
+	background-image: url("../imgs/star.png");
+	background-position: 0 0;
+}
+.star-3{
+	top: 390px;
+	background-image: url("../imgs/star.png");
+	background-position: 0 0;
+}
+.minutes {
+    color: #FFFFFF;
+    display: block;
+    font-family: times;
+    font-size: 29px;
+    left: -5px;
+    line-height: 45px;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    text-shadow: 1px 1px 0 #FF0000;
+    width: 45px;
+}
+.decoration-left {
+    background-color: none;
+    background-image: url("../imgs/timer.png");
+    background-position: 0 -41px;
+    display: inline-block;
+    height: 26px;
+    margin-bottom: 8px;
+    width: 120px;
+
+    margin-right: 5px;
+}
+.decoration-right {
+    background-color: none;
+    background-image: url("../imgs/timer.png");
+    background-position: 0 -6px;
+    display: inline-block;
+    height: 26px;
+    margin-bottom: 8px;
+    width: 120px;
+
+    margin-left: 5px;
+}

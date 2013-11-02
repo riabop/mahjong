@@ -8,10 +8,9 @@ App.timeMeter = function (){
 	var nowTime = 0;
 	var ini_milsec = 0;
 	var end_milsec = 0;
-	var flag50=0;
-	var flag75=0;
-	var flag90=0;
-	var flag100=0;
+
+	var stars=3;
+
 	var lastTime = 0;
 	var totalTime = 0;
 	var total_diference;
@@ -32,14 +31,14 @@ App.timeMeter = function (){
 			lastTime = rightNow;
 			
 			// update main time display
-			document.getElementById('mainTime').innerHTML = totalTime;
+			document.getElementById('mainTime').innerHTML = '<div class="decoration-left"></div>' + totalTime + '<div class="decoration-right"></div>';
 			totalTime++;
 		}
 	   	
 	   	var diference_percntage;
 
 	   	if (!flag_timeUp){
-		   	if (nowTime  < 0){ //&& flag100 == 0
+		   	if (nowTime  < 0){
 		  		console.log("Yow wasted all your time! You are a loser!");
 		  		flag_timeUp = true;
 		  		//go = false;
@@ -53,25 +52,31 @@ App.timeMeter = function (){
 		  	}
 	  	}
 
-	  	if (diference_percntage < 50 && flag50 == 0) {
+	  	//if (diference_percntage < 50 && flag50 == 0) {
+	  	if (diference_percntage < 50 && stars == 3) {
 	  		console.log("Yow wasted 50% of your time!");
 	  		var obj = document.getElementById("star60");
 	  		obj.style.backgroundPosition = "0px -60px";
-	  		flag50 = 1;
+	  		//flag50 = 1;
+	  		stars-=1;
 	  	};
 	  	
-	  	if (diference_percntage < 25 && flag75 == 0) {
+	  	//if (diference_percntage < 25 && flag75 == 0) {
+	  	if (diference_percntage < 25 && stars == 2) {
 	  		console.log("Yow wasted 75% of your time!");
 	  		var obj = document.getElementById("star80");
 	  		obj.style.backgroundPosition = "0px -60px";
-	  		flag75 = 1;
+	  		//flag75 = 1;
+	  		stars-=1;
 	  	};
 
-	  	if (diference_percntage < 10 && flag90 == 0) {
+	  	//if (diference_percntage < 10 && flag90 == 0) {
+	  	if (diference_percntage < 10 && stars == 1) {
 	  		console.log("Yow wasted 90% of your time!");
 	  		var obj = document.getElementById("star95");
 	  		obj.style.backgroundPosition = "0px -60px";
-	  		flag90 = 1;
+	  		//flag90 = 1;
+	  		stars-=1;
 	  	}
 
 	  	if (go) movId = window.requestAnimationFrame(animate);
@@ -86,18 +91,19 @@ App.timeMeter = function (){
 
   		var obj = document.getElementById("star60");
   		obj.style.backgroundPosition = "0px 0px";
-  		flag50 = 0;
+  		//flag50 = 0;
 
   		var obj = document.getElementById("star80");
   		obj.style.backgroundPosition = "0px 0px";
-  		flag75 = 0;
+  		//flag75 = 0;
 
   		var obj = document.getElementById("star95");
   		obj.style.backgroundPosition = "0px 0px";
-  		flag90 = 0;
+  		//flag90 = 0;
 
-  		//flag100 = 0;
   		flag_timeUp = false;
+
+  		stars=3;
 
   		document.getElementById('minutes').innerHTML = maxTime;
   		document.getElementById('mainTime').innerHTML = 0;
@@ -119,14 +125,23 @@ App.timeMeter = function (){
 	  	movId = window.requestAnimationFrame(animate);
 	};
 
-	var pause = function() {
+	this.pause = function() {
 		console.log("App.timeMeter.pause()");
 		go = false;
 	};
 
-	var stop = function() {
+	this.stop = function() {
 		console.log("App.timeMeter.stop()");
-		go = false;
+		go = true;
+	};
+
+	this.getStatus = function(){
+		console.log("App.timeMeter.getStatus()");
+		var status = {};
+		status.stars = stars;
+		status.totalTime = totalTime -1;
+		status.nowTime = nowTime +1;
+		return status;
 	};
 
 }

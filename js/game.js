@@ -6,13 +6,14 @@ var game = {
 	level: null, //escenario1,
 	timer: null,
 	init: function() { // atach events to the game interface.
-		// <div id="btnCancelGame"></div>
+
 		console.log("game.init() game interface Init");
+		
 		var el = document.getElementById("btnCancelGame");
 		el.onclick = function() {
-			// CANCEL THE GAME and ...
 			game.cancelGame();
 		};
+
 		this.timer = new App.timeMeter();
 	},
 	giveMeThePieceType: function(id) {
@@ -45,6 +46,10 @@ var game = {
 		obj.dance(quantum);
 	},
 	startGame: function() {
+
+		console.log("game.startGame()");
+		this.firstSelectedPiece = null;
+
 		//createStage(escenario1);
 		createStage(App.world.levels[window.game.level]);
 		drawStage();
@@ -59,6 +64,23 @@ var game = {
 	},
 	timeIsUp: function() {
 		console.log("time is up!");
+	},
+	over: function() {
+
+		console.log("The game was over!");
+		this.timer.pause();
+
+		/*
+		status.stars = stars;
+		status.totalTime = totalTime;
+		status.nowTime = nowTime;
+		*/
+
+		var i = this.timer.getStatus();
+		console.log(i);
+
+		//App.dlgSumary.show();
+
 	},
 	showMenu: function() {
 

@@ -313,11 +313,13 @@ var worldManager = {
 
 		if (cont == 0) {
 			console.log("We dont have pieces!");
+			game.over();
 			
 		} else { // There are more pieces
 			
 			if (cont == 1) {
 				console.log("There is only one piece!");
+
 
 			} else { // There are more than one pieces
 
