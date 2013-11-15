@@ -8,7 +8,6 @@ var piece = function(pieceType) {
 		return type + "_" + timestamp + "_" + randomNumber;
 	};
 
-
 	var type = "piece";
 	var el = null;
 	var ID = createID();

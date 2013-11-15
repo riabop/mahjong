@@ -3,6 +3,9 @@
 	<head>
 		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet" href="css/screens.css">
+		<link rel="stylesheet" href="css/timer.css">
+		<link rel="stylesheet" href="css/dlg.css">
+		<link rel="stylesheet" href="css/summary.css">
 		<title>mahjong</title>
 	</head>
 	<body>
@@ -19,31 +22,47 @@
 					<div id="time"></div>
 				</div>
 			</div>
-			<div id="btnCancelGame">Cancel game</div>
+			<button id="btnCancelGame">Cancel game</button>
+			<button id="btnShuffle">Shuffle</button>
 		</div>
 
 		<div id="splashScreen"></div>
 
 		<div id="mainMenu">
 			<div class="btnGroup">
-				<div id="btnSound">Sound off</div>
-				<div id="btnPlay">Play</div>
+				<button id="btnSound">Sound off</button>
+				<button id="btnPlay">Play</button>
 			</div>
 		</div>
 
 		<div id="chooseLevel">
-			<div id="ch-title" class="ch-title">Choose a level bitch!</div>
-			<div id="ch-btns-container" class="">
-				<!-- <div id="btn_lvl_1" class="btnLvl">Level 1</div> -->
-			</div>
-			<div id="btnReturnToMenu" class="btnLvl">Return</div>
+			<div id="ch-title" class="ch-title">Choose a level!</div>
+			<div id="ch-btns-container" class=""></div>
+			<button id="btnReturnToMnu" class="btnLvl">Return</button>
 		</div>
 
-		<div id="dlgLayer">
-			<div id="layer_dlg_timeIsUp"></div>
-			<div id="layer_dlg_Finish"></div>
-			<div id="layer_dlg_win"></div>
-			<div id="layer_dlg_windlgSumary"></div>
+		<div id="dlgBlackBg" class="black-layer">
+		
+			<div id="dlgLayer">
+				<h1 id="dlgText"></h1>
+				<button id="btnReturnToMnu" class="btnReturnToMnu">Acept</button>
+				<button id="btnDlgCancel" class="btnDlgCancel">Cancel</button>
+			</div>
+			
+			<div id="dlg-summary">
+				<div class="smr-title">Summary</div>
+				<div class="smr-content">
+					<label>Stars</label>
+						<div id="smr-star-1" class="smr-star"></div>
+						<div id="smr-star-2" class="smr-star"></div>
+						<div id="smr-star-3" class="smr-star"></div>
+					<label>Time</label>
+						<div id="smr-time" class="smr-time">10:35</div>
+					<h1 id="dlg-sumary-text" class="dlg-sumary-text">Yow win!</h1>
+				</div>
+				<button id="btnDlgOK" class="btnDlgOK">OK</button>
+			</div>
+
 		</div>
 
 		<script type="text/javascript" src="js/router.js"></script>
@@ -54,7 +73,8 @@
 		<script type="text/javascript" src="js/world.js"></script>
 		<script type="text/javascript" src="js/timeMeter.js"></script>
 		<script type="text/javascript" src="js/worldManager.js"></script>
-		<script type="text/javascript" src="js/dlgWindows.js"></script>
+		<script type="text/javascript" src="js/dlg_window.js"></script>
+		<script type="text/javascript" src="js/dlg_summary.js"></script>
 		<script type="text/javascript" src="js/game.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<!--<script type="text/javascript" src="js/mahjong.js"></script>-->

@@ -28,7 +28,7 @@ var srceenChooseLevel = {
 
 	init: function() { // init wil be executed only once. Here Ill atach events to the buttons
 		console.log("srceenChooseLevel.init()");
-		var el = document.getElementById("btnReturnToMenu");
+		var el = document.getElementById("btnReturnToMnu");
 
 		el.onclick = function() {
 			srceenChooseLevel.hide();

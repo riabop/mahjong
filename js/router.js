@@ -8,6 +8,7 @@ App.router = {
 		srceenMainMenu.init();
 		srceenChooseLevel.init();
 		game.init();
+		App.dlg.init();
 		this.goTo("splashScreen");
 	},
 	goTo: function(whereToGo) {
@@ -15,6 +16,21 @@ App.router = {
 			case "splashScreen":
 				console.log("router.splashScreen");
 				srceenSplashScreen.hide(1000);
+
+				App.dlg.setMessage("This game is cool!");
+
+				App.dlg.onCancel = function(){
+					srceenMainMenu.hide();
+					App.router.goTo("choseLevel");
+					this.hide();
+				};
+				
+				App.dlg.onAccept = function(){
+					this.hide();
+				};
+
+				App.dlg.show();
+
 				this.goTo("mainMenu");
 				break;
 
@@ -31,6 +47,11 @@ App.router = {
 			case "playGame":
 				game.startGame();
 				break;
+
+			case "aboutThisGame":
+				console.log("router.aboutThisGame");
+				break;
+
 		}
 	}
 

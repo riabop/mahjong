@@ -118,7 +118,8 @@
 
 /* cancel game button */
 
-#btnCancelGame{
+/*
+#btnCancelGame{	
 	background-color: #0ff;
 	border: 7px solid #fff;
 	border-radius: 10px;
@@ -134,10 +135,77 @@
 	float: right;
 	margin-top: 10px;
 	margin-right: 10px;
+*/
+
+#btnCancelGame {
+    background-color: #008B8B;
+    border: 2px solid #FFFFFF;
+    border-radius: 1em 1em 1em 1em;
+    bottom: 0;
+    box-shadow: 0 0 0.3em #000000;
+    color: #FFFFFF;
+    cursor: pointer;
+    float: right;
+    font-family: arial;
+    font-size: 1.2em;
+    margin: 12px;
+    padding: 0.3em 1em;
+    position: relative;
+    text-shadow: 0 -1px 1px #000000;
+
+    
+		background-image: -moz-linear-gradient(top, #488989, #167070);  
+		background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #488989),color-stop(1, #167070));
+		background-image: -webkit-linear-gradient(top, #488989, #167070);  
+		background-image: -moz-linear-gradient(top, #488989, #167070);  
+		background-image: -ms-linear-gradient(top, #488989, #167070);  
+		background-image: -o-linear-gradient(top, #488989, #167070);
 }
 
 #btnCancelGame:hover{
-	background-color: #ff0;
+
+		background-image: -moz-linear-gradient(top, #005a5a, #001010);  
+		background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #005a5a),color-stop(1, #001010));
+		background-image: -webkit-linear-gradient(top, #005a5a, #001010);  
+		background-image: -moz-linear-gradient(top, #005a5a, #001010);  
+		background-image: -ms-linear-gradient(top, #005a5a, #001010);  
+		background-image: -o-linear-gradient(top, #005a5a, #001010);
+}
+
+/* shuffle button */
+
+#btnShuffle {
+    background-color: #008B8B;
+    border: 2px solid #FFFFFF;
+    border-radius: 1em 1em 1em 1em;
+    bottom: 0;
+    box-shadow: 0 0 0.3em #000000;
+    color: #FFFFFF;
+    cursor: pointer;
+    float: right;
+    font-family: arial;
+    font-size: 1.2em;
+    margin: 12px;
+    padding: 0.3em 1em;
+    position: relative;
+    text-shadow: 0 -1px 1px #000000;
+    
+		background-image: -moz-linear-gradient(top, #488989, #167070);  
+		background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #488989),color-stop(1, #167070));
+		background-image: -webkit-linear-gradient(top, #488989, #167070);  
+		background-image: -moz-linear-gradient(top, #488989, #167070);  
+		background-image: -ms-linear-gradient(top, #488989, #167070);  
+		background-image: -o-linear-gradient(top, #488989, #167070);
+}
+
+#btnShuffle:hover{
+
+		background-image: -moz-linear-gradient(top, #005a5a, #001010);  
+		background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #005a5a),color-stop(1, #001010));
+		background-image: -webkit-linear-gradient(top, #005a5a, #001010);  
+		background-image: -moz-linear-gradient(top, #005a5a, #001010);  
+		background-image: -ms-linear-gradient(top, #005a5a, #001010);  
+		background-image: -o-linear-gradient(top, #005a5a, #001010);
 }
 
 .ch-title{
@@ -145,3 +213,4 @@
 	margin: 10px;
 	padding: auto auto;
 }
+
