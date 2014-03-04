@@ -21,7 +21,8 @@ var PIECE_THICKNESS = 25;
 /*
 	this function draws the pieces, reading the virtual stage
 */
-var drawStage = function() {
+ 
+var drawGameStage = function() {
 
 	console.log("drawStage()");
 	var win_w = window.innerWidth;
@@ -67,13 +68,15 @@ var drawStage = function() {
 
 var scnarioWidth = null;
 var scnarioHeight = null;
+var drawStage = drawGameStage;
+
 window.onresize = function(event) {
 	//console.log("width:", window.innerWidth, ", height:", window.innerHeight);
 	drawStage();
 }
 
 /* 
-	This function creates a virtual stage reading the world json 
+	This function creates a virtual stage reading the world's json 
 */
 var createStage = function(scn) { // Here the pieces are created, we create new objects
 	console.log("createStage()");

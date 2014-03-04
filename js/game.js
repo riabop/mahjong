@@ -172,5 +172,19 @@ var actionsManager = {
 		var continuePlaying = worldManager.countAvailablePieces();
 		console.log("continuePlaying:", continuePlaying);
 
+		if (continuePlaying < 2){
+			console.log("The game is over!");
+			
+			App.dlgSummary.onAccept = function(){
+				//srceenMainMenu.hide();
+				//App.router.goTo("choseLevel");
+				App.router.goTo("mainMenu");
+				this.hide();
+			};
+			
+			App.dlgSummary.show();
+
+		}
+
 	}
 };

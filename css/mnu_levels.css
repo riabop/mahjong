@@ -1,0 +1,32 @@
+.ch-title{
+	background-image: url("../imgs/menu/logo.png");
+
+	background-color: #000000;
+    /* background-image: url("../imgs/menu/logo.png"); */
+    background-repeat: no-repeat;
+    height: 100px;
+    margin: 0;
+    position: absolute;
+    width: 350px;
+}
+
+#ch-btns-container{
+	margin: auto;
+	position: absolute;
+}
+
+.btnLvl{
+	/* margin: 10px; */
+	background-size: 100% auto;
+	background-position: center center;
+	
+	border-width: 0;
+	padding: 0;
+
+	position: absolute;
+}
+
+#btn-ch-ReturnToMnu{
+    bottom: 15px;
+    position: absolute;
+}

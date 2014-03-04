@@ -20,7 +20,9 @@
     border: 10px solid #FFFFFF;
     border-radius: 50px 50px 50px 50px;
     box-shadow: 1px 1px 10px #000000;
-    display: block;
+    /* display: block; */
+    display: none;
+
     font-family: helvetica,arial,sans-serif;
     margin: 6% auto auto;
     padding: 0;

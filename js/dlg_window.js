@@ -1,6 +1,6 @@
 "use strict";
 
-App.dlgs = [];
+//App.dlgs = [];
 
 App.dlg = {
 	init:function(){
@@ -18,15 +18,23 @@ App.dlg = {
 		document.getElementById('dlgText').innerHTML = msg;
 	},
 	show:function(){
-		console.log("dlgTimeIsUp.hide()");
+		//console.log("dlgTimeIsUp.hide()");
 		//this.fadeOut();
-		var obj = document.getElementById("dlgBlackBg");
+
+		// bg transparent layer
+		var obj = document.getElementById("dlgBlackBg"); // !!!
 		obj.style.opacity = 1;
+		obj.style.display = "block";
+
+		// show dlg
+		var obj = document.getElementById("dlgLayer");
 		obj.style.display = "block";
 	},
 	hide: function() {
 		console.log("dlg.hide()");
-		var obj = document.getElementById("dlgBlackBg");
+		var obj = document.getElementById("dlgBlackBg"); // !!!
+
+
 		obj.style.opacity = 0;
 		obj.style.display = "none";
 		//this.fadeOut();

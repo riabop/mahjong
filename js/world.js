@@ -4,6 +4,7 @@
 		type: "scenary",
 		name: "scenary number one",
 		bgPicture: "flowers.jpg",
+		facePicture: "forest.png",
 		time: 120, // 120 segundos
 
 		// Double!!!
@@ -221,6 +222,7 @@
 		type: "scenary",
 		name: "scenary number one",
 		bgPicture: "flowers.jpg",
+		facePicture: "bridge.png",
 		time: 60, // 60 segundos
 		positions: [
 			{x:0, y:0, z:0, pieceType:1},
@@ -252,6 +254,7 @@
 		type: "scenary",
 		name: "scenary number one",
 		bgPicture: "flowers.jpg",
+		facePicture: "lake.png",
 		time: 10, // 60 segundos
 
 		// Double!!!

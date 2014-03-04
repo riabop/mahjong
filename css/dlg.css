@@ -18,7 +18,9 @@
     border: 10px solid #FFFFFF;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 1px 1px 10px #000000;
-    display: block;
+    /* display: block; */
+    display: none;
+
     font-family: helvetica,arial,sans-serif;
     height: 189px;
     margin: 6% auto auto;
